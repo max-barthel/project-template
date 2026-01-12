@@ -34,3 +34,7 @@ Defaults matter. This repository exists to make good practices automatic and bad
 ## Structure
 
 See docs/STRUCTURE.md for the canonical project layout.
+
+## Decicions
+
+Foundational decisions are documented in docs/DECISIONS.md.

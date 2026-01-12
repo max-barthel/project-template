@@ -7,3 +7,5 @@ All projects must:
 - Have type checking enabled
 
 Code that does not pass `make lint` or `make test` is not considered valid.
+
+Tool versions are intentionally pinned and updated here centrally.
