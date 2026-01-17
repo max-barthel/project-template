@@ -20,21 +20,16 @@ Every new project starts by forking this repository and then adapting it intenti
 - A framework
 - A one-size-fits-all solution
 
-## How to use
+## Quickstart
 
-1. Fork this repository.
-2. Rename the project and update this README.
-3. Remove anything that does not apply.
-4. Build your product on top of these defaults.
+Prereqs: Python + a virtual environment, plus `pre-commit`.
 
-## Philosophy
+```bash
+python -m venv .venv
+source .venv/bin/activate
 
-Defaults matter. This repository exists to make good practices automatic and bad practices inconvenient.
+python -m pip install -U pip
+python -m pip install -e ".[dev]"
 
-## Structure
-
-See docs/STRUCTURE.md for the canonical project layout.
-
-## Decicions
-
-Foundational decisions are documented in docs/DECISIONS.md.
+pre-commit install
+make ci

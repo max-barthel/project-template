@@ -1,21 +1,39 @@
-.PHONY: help setup test lint run
+SHELL := /bin/bash
+.DEFAULT_GOAL := help
 
+UV := uv
+
+.PHONY: help
 help:
-	@echo "Available commands:"
-	@echo "  make setup   - prepare local environment"
-	@echo "  make test    - run tests"
-	@echo "  make lint    - run linters"
-	@echo "  make run     - run the application"
+	@printf "Targets:\n"
+	@printf "  setup  - sync deps + install pre-commit hooks\n"
+	@printf "  fmt    - format code\n"
+	@printf "  lint   - run static checks\n"
+	@printf "  test   - run tests\n"
+	@printf "  ci     - run what CI runs (fmt check + lint + tests)\n"
 
+.PHONY: setup
 setup:
-	uv venv
-	uv sync --all-groups
-	uv run pre-commit install
+	$(UV) sync --all-extras
+	$(UV) run pre-commit install
 
-test:
-	uv run pytest
+.PHONY: fmt
+fmt:
+	$(UV) run ruff format .
+	$(UV) run ruff check . --fix
 
+.PHONY: lint
 lint:
-	uv run ruff check .
-	uv run ruff format --check .
-	uv run mypy app
+	$(UV) run ruff check .
+	$(UV) run mypy .
+
+.PHONY: test
+test:
+	$(UV) run pytest -q
+
+.PHONY: ci
+ci:
+	$(UV) run ruff format . --check
+	$(UV) run ruff check .
+	$(UV) run mypy .
+	$(UV) run pytest -q
