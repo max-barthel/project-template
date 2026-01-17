@@ -3,23 +3,27 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "startup-base"
+name = "api"
 version = "0.1.0"
-description = "Opinionated, modern baseline repository for starting new software projects."
+description = "FastAPI backend service"
 readme = "README.md"
 requires-python = ">=3.12"
-license = { text = "MIT" }
-
-dependencies = []
+license = "MIT"
+dependencies = ["fastapi>=0.110", "uvicorn[standard]>=0.29"]
 
 [project.optional-dependencies]
 dev = [
   "pre-commit>=3.7",
   "pytest>=8.0",
-  "pytest-cov>=5.0",
   "ruff>=0.6",
   "mypy>=1.8",
 ]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -31,7 +35,3 @@ line-length = 88
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
 ignore = ["E501"]
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"

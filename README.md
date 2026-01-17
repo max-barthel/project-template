@@ -22,14 +22,12 @@ Every new project starts by forking this repository and then adapting it intenti
 
 ## Quickstart
 
-Prereqs: Python + a virtual environment, plus `pre-commit`.
+This repo uses uv for dependency + venv management.
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
+brew install uv  # or: curl -LsSf https://astral.sh/uv/install.sh | sh
 
-python -m pip install -U pip
-python -m pip install -e ".[dev]"
+uv sync --all-extras
+uv run pre-commit install
 
-pre-commit install
 make ci

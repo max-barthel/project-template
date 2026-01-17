@@ -1,39 +1,36 @@
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
-UV := uv
-
 .PHONY: help
 help:
 	@printf "Targets:\n"
-	@printf "  setup  - sync deps + install pre-commit hooks\n"
-	@printf "  fmt    - format code\n"
-	@printf "  lint   - run static checks\n"
-	@printf "  test   - run tests\n"
-	@printf "  ci     - run what CI runs (fmt check + lint + tests)\n"
+	@printf "  api-setup  api-ci  api-dev\n"
+	@printf "  web-setup  web-ci  web-dev\n"
+	@printf "  ci         dev\n"
 
-.PHONY: setup
-setup:
-	$(UV) sync --all-extras
-	$(UV) run pre-commit install
+api-setup:
+	cd apps/api && uv sync --all-extras
+	cd apps/api && uv run pre-commit install
 
-.PHONY: fmt
-fmt:
-	$(UV) run ruff format .
-	$(UV) run ruff check . --fix
+api-ci:
+	cd apps/api && uv run ruff format . --check
+	cd apps/api && uv run ruff check .
+	cd apps/api && uv run mypy .
+	cd apps/api && uv run pytest -q
 
-.PHONY: lint
-lint:
-	$(UV) run ruff check .
-	$(UV) run mypy .
+api-dev:
+	cd apps/api && uv run uvicorn api.main:app --reload --host 127.0.0.1 --port 8000
 
-.PHONY: test
-test:
-	$(UV) run pytest -q
+web-setup:
+	cd apps/web && bun install
 
-.PHONY: ci
-ci:
-	$(UV) run ruff format . --check
-	$(UV) run ruff check .
-	$(UV) run mypy .
-	$(UV) run pytest -q
+web-ci:
+	cd apps/web && bun run build
+
+web-dev:
+	cd apps/web && bun run dev
+
+ci: api-ci web-ci
+
+dev:
+	@$(MAKE) -j2 api-dev web-dev
