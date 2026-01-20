@@ -20,6 +20,11 @@ Every new project starts by forking this repository and then adapting it intenti
 - A framework
 - A one-size-fits-all solution
 
+## Stack
+
+- Backend: FastAPI + uv (Python 3.12+)
+- Frontend: React + Vite + Bun
+
 ## Quickstart
 
 Backend (uv):

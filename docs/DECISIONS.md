@@ -26,12 +26,12 @@ Reason:
 
 ## Project Type Assumption
 
-Default assumption is a backend or local application, not frontend-heavy UI.
+Default assumption is a full-stack app with a lightweight web UI.
 
 Reason:
 
-- Aligns with my strengths and long-term goals
-- Frontends are added only when explicitly needed
+- Most projects need a minimal web surface
+- Keeps the template practical without forcing a heavy frontend
 
 ## Dependency Management
 
@@ -43,6 +43,20 @@ Reason:
 - Single tool for venv + deps
 - Simple mental model
 - Actively developed and widely adopted
+
+## Frontend Stack
+
+Default frontend stack:
+
+- Bun for package management
+- Vite for dev/build
+- React + TypeScript for UI
+
+Reason:
+
+- Fast local feedback loop
+- Minimal configuration overhead
+- Widely supported ecosystem
 
 ## Code Quality
 

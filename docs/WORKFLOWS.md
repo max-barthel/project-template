@@ -3,13 +3,13 @@
 All projects forked from this repository expose the same entry points.
 
 make setup
-Initial project setup. Creates environments and installs dependencies.
+Initial project setup for both apps. Creates environments and installs dependencies.
 
 make test
-Runs the full test suite.
+Runs the backend test suite.
 
 make lint
-Runs all code quality checks.
+Runs backend and frontend linting.
 
 make run
-Runs the application locally.
+Runs both apps locally.
