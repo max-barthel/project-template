@@ -27,24 +27,28 @@ Every new project starts by using this repository as a GitHub template and then 
 
 ## Quickstart
 
-Backend (uv):
+First-time setup (run once):
 
 ```bash
-make api-setup
-make api-dev
+make setup
 ```
 
-Frontend (bun):
-
-```bash
-make web-setup
-make web-dev
-```
-
-Run both together:
+Start both apps:
 
 ```bash
 make dev
+```
+
+Backend only:
+
+```bash
+make api-dev
+```
+
+Frontend only:
+
+```bash
+make web-dev
 ```
 
 Run all checks:
